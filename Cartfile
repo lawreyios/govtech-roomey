@@ -1,0 +1,6 @@
+github "Alamofire/Alamofire" ~> 5.1
+github "Swinject/Swinject"
+github "Swinject/SwinjectStoryboard" "0ca45c83a8aa398c153d8a036c95abb4343cfa0c"
+github "realm/realm-cocoa"
+github "Quick/Quick"
+github "Quick/Nimble"
