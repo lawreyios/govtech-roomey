@@ -34,8 +34,8 @@ xcuserdata/
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-Carthage/Checkouts
-Carthage/Build
+Roomey/Carthage/Checkouts
+Roomey/Carthage/Build
 
 # Code Injection
 #
@@ -85,9 +85,6 @@ Temporary Items
 ## Build generated
 build/
 DerivedData/
-API/node_modules
-API/dist
-API/var/logs
 
 ## Various settings
 *.pbxuser

@@ -1,9 +1,0 @@
-cache:
-    local: ~/romeCache
-repositoryMap:
-- Kingfisher:
-    - name: Kingfisher
-    - name: KingfisherSwiftUI 
-- realm-cocoa:
-    - name: Realm
-    - name: RealmSwift
