@@ -13,6 +13,8 @@
 		AB3FAEB4247A32800011C76B /* ImageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEB3247A32800011C76B /* ImageConstants.swift */; };
 		AB3FAEB6247A32CE0011C76B /* SortModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEB5247A32CE0011C76B /* SortModalViewModel.swift */; };
 		AB3FAEB8247A66B50011C76B /* Array+RM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEB7247A66B50011C76B /* Array+RM.swift */; };
+		AB3FAEBA247A788B0011C76B /* QRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEB9247A788B0011C76B /* QRCodeScanner.swift */; };
+		AB3FAEBC247A7B230011C76B /* ConfirmationWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEBB247A7B230011C76B /* ConfirmationWebView.swift */; };
 		ABB3C35D2478EB9000D2AFBC /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3C35C2478EB9000D2AFBC /* StringConstants.swift */; };
 		ABB3C3652478F43B00D2AFBC /* RoomListSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3C3642478F43B00D2AFBC /* RoomListSpec.swift */; };
 		ABB3C3792478F4CA00D2AFBC /* ResponseDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3C3782478F4CA00D2AFBC /* ResponseDataFactory.swift */; };
@@ -38,6 +40,8 @@
 		ABC7AFA22477DBB10029FFF9 /* DateTimePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC7AFA12477DBB10029FFF9 /* DateTimePickerTextField.swift */; };
 		ABC7AFA62478253B0029FFF9 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC7AFA42478253B0029FFF9 /* LoadingIndicator.swift */; };
 		ABC7AFA72478253B0029FFF9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC7AFA52478253B0029FFF9 /* LoadingView.swift */; };
+		ABD1E662247A97A300C7C146 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1E661247A97A300C7C146 /* ConfirmationView.swift */; };
+		ABD1E668247AB19C00C7C146 /* SortModalViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1E667247AB19C00C7C146 /* SortModalViewModelSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,8 @@
 		AB3FAEB3247A32800011C76B /* ImageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
 		AB3FAEB5247A32CE0011C76B /* SortModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalViewModel.swift; sourceTree = "<group>"; };
 		AB3FAEB7247A66B50011C76B /* Array+RM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RM.swift"; sourceTree = "<group>"; };
+		AB3FAEB9247A788B0011C76B /* QRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScanner.swift; sourceTree = "<group>"; };
+		AB3FAEBB247A7B230011C76B /* ConfirmationWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationWebView.swift; sourceTree = "<group>"; };
 		ABB3C35C2478EB9000D2AFBC /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		ABB3C3622478F43B00D2AFBC /* RoomeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoomeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB3C3642478F43B00D2AFBC /* RoomListSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListSpec.swift; sourceTree = "<group>"; };
@@ -100,6 +106,8 @@
 		ABC7AFA12477DBB10029FFF9 /* DateTimePickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerTextField.swift; sourceTree = "<group>"; };
 		ABC7AFA42478253B0029FFF9 /* LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		ABC7AFA52478253B0029FFF9 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		ABD1E661247A97A300C7C146 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		ABD1E667247AB19C00C7C146 /* SortModalViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalViewModelSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +142,7 @@
 			children = (
 				ABC7AF662477C4C30029FFF9 /* JSONs */,
 				ABB3C3642478F43B00D2AFBC /* RoomListSpec.swift */,
+				ABD1E667247AB19C00C7C146 /* SortModalViewModelSpec.swift */,
 				ABB3C3662478F43B00D2AFBC /* Info.plist */,
 			);
 			path = RoomeyTests;
@@ -268,11 +277,12 @@
 		ABC7AF952477D45C0029FFF9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				ABB60BD424797BDC00028B02 /* RoomCardView.swift */,
+				ABD1E664247AB09900C7C146 /* Components */,
 				ABC7AF962477D46F0029FFF9 /* RoomListView.swift */,
 				ABC7AF982477D4760029FFF9 /* RoomListViewModel.swift */,
 				ABB60BD82479828E00028B02 /* SortModalView.swift */,
 				AB3FAEB5247A32CE0011C76B /* SortModalViewModel.swift */,
+				ABD1E661247A97A300C7C146 /* ConfirmationView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -280,9 +290,8 @@
 		ABC7AF9A2477D6230029FFF9 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				ABD1E663247AB08300C7C146 /* Custom */,
 				ABC7AFA32478253B0029FFF9 /* LoadingIndicator */,
-				ABC7AFA12477DBB10029FFF9 /* DateTimePickerTextField.swift */,
-				ABB60BD624797C0000028B02 /* HorizontalLine.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -294,6 +303,25 @@
 				ABC7AFA52478253B0029FFF9 /* LoadingView.swift */,
 			);
 			path = LoadingIndicator;
+			sourceTree = "<group>";
+		};
+		ABD1E663247AB08300C7C146 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				ABC7AFA12477DBB10029FFF9 /* DateTimePickerTextField.swift */,
+				ABB60BD624797C0000028B02 /* HorizontalLine.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		ABD1E664247AB09900C7C146 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				ABB60BD424797BDC00028B02 /* RoomCardView.swift */,
+				AB3FAEB9247A788B0011C76B /* QRCodeScanner.swift */,
+				AB3FAEBB247A7B230011C76B /* ConfirmationWebView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABD1E668247AB19C00C7C146 /* SortModalViewModelSpec.swift in Sources */,
 				ABB3C3792478F4CA00D2AFBC /* ResponseDataFactory.swift in Sources */,
 				ABB3C3652478F43B00D2AFBC /* RoomListSpec.swift in Sources */,
 			);
@@ -434,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABC7AFA22477DBB10029FFF9 /* DateTimePickerTextField.swift in Sources */,
+				AB3FAEBC247A7B230011C76B /* ConfirmationWebView.swift in Sources */,
 				ABC7AF992477D4760029FFF9 /* RoomListViewModel.swift in Sources */,
 				ABC7AF7E2477CE110029FFF9 /* AppEnvironment.swift in Sources */,
 				ABC7AF522477B5DA0029FFF9 /* AppDelegate.swift in Sources */,
@@ -445,10 +475,12 @@
 				ABC7AFA02477D79B0029FFF9 /* Numeric+RM.swift in Sources */,
 				ABB60BD92479828E00028B02 /* SortModalView.swift in Sources */,
 				ABB3C35D2478EB9000D2AFBC /* StringConstants.swift in Sources */,
+				ABD1E662247A97A300C7C146 /* ConfirmationView.swift in Sources */,
 				ABC7AF542477B5DA0029FFF9 /* SceneDelegate.swift in Sources */,
 				ABC7AF6B2477C8A70029FFF9 /* APIHandler.swift in Sources */,
 				ABC7AF792477CC560029FFF9 /* NetworkError.swift in Sources */,
 				AB3FAEB4247A32800011C76B /* ImageConstants.swift in Sources */,
+				AB3FAEBA247A788B0011C76B /* QRCodeScanner.swift in Sources */,
 				ABC7AF912477D2D20029FFF9 /* RoomHandler.swift in Sources */,
 				ABB60BD724797C0000028B02 /* HorizontalLine.swift in Sources */,
 				ABC7AF7C2477CC9B0029FFF9 /* String+RM.swift in Sources */,

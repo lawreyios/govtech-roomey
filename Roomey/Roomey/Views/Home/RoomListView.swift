@@ -13,6 +13,8 @@ struct RoomListView: View {
     @ObservedObject var viewModel = RoomListViewModel()
     
     @State var shouldPresentSortView = false
+    @State var shouldPresentQRCodeScannerView = false
+    @State var webViewURL = String.empty
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -74,6 +76,29 @@ struct RoomListView: View {
         }
     }
     
+    var cameraButton: some View {
+        NavigationLink(destination: ConfirmationView(webViewURL: self.$webViewURL),
+                       isActive: .constant(!$webViewURL.wrappedValue.isEmpty)) {
+            Button(action: {
+                self.shouldPresentQRCodeScannerView = true
+            }) {
+                Image(Icon.camera).resizable().aspectRatio(contentMode: .fit).frame(width: 22.0, height: 22.0)
+            }
+        }
+    }
+    
+    var qrCodeScanningView: some View {
+        QRCodeScannerView(codeTypes: [.qr]) { result in
+            switch result {
+            case .success(let code):
+                self.webViewURL = code
+                self.shouldPresentQRCodeScannerView = false
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     var body: some View {
         LoadingView(isShowing: $viewModel.isLoading) {
             NavigationView {
@@ -95,6 +120,10 @@ struct RoomListView: View {
                 }) {
                     SortModalView(shouldPresentSortView: self.$shouldPresentSortView,
                                   selectedSortType: self.$viewModel.selectedSortType)
+                }
+                .navigationBarItems(trailing: self.cameraButton)
+                .sheet(isPresented: self.$shouldPresentQRCodeScannerView) {
+                    self.qrCodeScanningView
                 }
             }
         }
