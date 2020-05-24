@@ -8,8 +8,9 @@
 
 import SwiftUI
 import Combine
+import Network
 
-class RoomListViewModel: ObservableObject {
+class RoomListViewModel: ObservableObject, NetworkCheckObserver {
     
     @Published var date = String.empty {
         didSet { isFormValidated = !date.isEmpty && !time.isEmpty }
@@ -25,7 +26,9 @@ class RoomListViewModel: ObservableObject {
     var availableRooms = [Room]()
     @Published var updatedRooms = [Room]()
     @Published var selectedSortType = SortType.level
+    @Published var networkStatus = NWPath.Status.unsatisfied
     
+    private var networkCheck = NetworkCheck.sharedInstance()
     private var disposables: Set<AnyCancellable> = []
     private var roomAvailabilityHandler = RoomAvailabilityHandler()
     
@@ -55,6 +58,15 @@ class RoomListViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .assign(to: \.rooms, on: self)
             .store(in: &disposables)
+    }
+    
+    func startMonitoringNetwork() {
+        networkStatus = networkCheck.currentStatus
+        networkCheck.addObserver(observer: self)
+    }
+    
+    func stopMonitoringNetwork() {
+        networkCheck.removeObserver(observer: self)
     }
     
     func getRooms() {
@@ -96,4 +108,7 @@ class RoomListViewModel: ObservableObject {
         }
     }
     
+    func statusDidChange(status: NWPath.Status) {
+        networkStatus = status
+    }
 }

@@ -13,7 +13,7 @@ import SwiftUI
 /// For testing inside the simulator, set the `simulatedData` property to some test data you want to send back.
 public struct QRCodeScannerView: UIViewControllerRepresentable {
     public enum ScanError: Error {
-        case badInput, badOutput
+        case invalid, noPermission, none
     }
 
     public class ScannerCoordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
@@ -39,11 +39,20 @@ public struct QRCodeScannerView: UIViewControllerRepresentable {
         }
 
         func found(code: String) {
+            guard code.contains(QRCode.domain) else {
+                parent.completion(.failure(.invalid))
+                return
+            }
+            
             parent.completion(.success(code))
         }
 
         func didFail(reason: ScanError) {
             parent.completion(.failure(reason))
+        }
+        
+        func checkCameraPermission() {
+            parent.completion(.failure(.noPermission))
         }
     }
 
@@ -55,7 +64,6 @@ public struct QRCodeScannerView: UIViewControllerRepresentable {
         override public func viewDidLoad() {
             super.viewDidLoad()
 
-
             NotificationCenter.default.addObserver(self,
                                                    selector: #selector(updateOrientation),
                                                    name: Notification.Name("UIDeviceOrientationDidChangeNotification"),
@@ -63,6 +71,8 @@ public struct QRCodeScannerView: UIViewControllerRepresentable {
 
             view.backgroundColor = UIColor.black
             captureSession = AVCaptureSession()
+            
+            checkCameraAccess()
 
             guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
             let videoInput: AVCaptureDeviceInput
@@ -76,7 +86,7 @@ public struct QRCodeScannerView: UIViewControllerRepresentable {
             if (captureSession.canAddInput(videoInput)) {
                 captureSession.addInput(videoInput)
             } else {
-                delegate?.didFail(reason: .badInput)
+                delegate?.didFail(reason: .invalid)
                 return
             }
 
@@ -88,8 +98,18 @@ public struct QRCodeScannerView: UIViewControllerRepresentable {
                 metadataOutput.setMetadataObjectsDelegate(delegate, queue: DispatchQueue.main)
                 metadataOutput.metadataObjectTypes = delegate?.parent.codeTypes
             } else {
-                delegate?.didFail(reason: .badOutput)
+                delegate?.didFail(reason: .invalid)
                 return
+            }
+        }
+        
+        func checkCameraAccess() {
+            switch AVCaptureDevice.authorizationStatus(for: .video) {
+            case .denied, .restricted, .notDetermined:
+                delegate?.checkCameraPermission()
+            case .authorized: break
+            @unknown default:
+                print("error")
             }
         }
 

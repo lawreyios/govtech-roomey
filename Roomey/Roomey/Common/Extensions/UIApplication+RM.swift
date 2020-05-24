@@ -6,4 +6,16 @@
 //  Copyright © 2020 Lawrence Tan. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+
+extension UIApplication {
+    static func goToSettings() {
+        guard let settingsUrl = URL(string: openSettingsURLString) else {
+            return
+        }
+        
+        if shared.canOpenURL(settingsUrl) {
+            shared.open(settingsUrl)
+        }
+    }
+}

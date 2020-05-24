@@ -10,11 +10,17 @@ import SwiftUI
 
 struct RoomListView: View {
     
+    enum ModalViewType: Int {
+        case qrCodeScanner, sort, none
+    }
+    
     @ObservedObject var viewModel = RoomListViewModel()
     
-    @State var shouldPresentSortView = false
-    @State var shouldPresentQRCodeScannerView = false
+    @State var shouldPresentModal = false
+    @State var shouldShowAlert = false
     @State var webViewURL = String.empty
+    @State var scanError = QRCodeScannerView.ScanError.none
+    @State var modalViewType = ModalViewType.none
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -59,7 +65,8 @@ struct RoomListView: View {
             Spacer()
             Spacer()
             Button(action: {
-                self.shouldPresentSortView = true
+                self.modalViewType = .sort
+                self.shouldPresentModal = true
             }) {
                 Text(RMButtonText.sort).foregroundColor(Color.black).font(Font.system(size: 12.0))
             }
@@ -79,11 +86,15 @@ struct RoomListView: View {
     var cameraButton: some View {
         NavigationLink(destination: ConfirmationView(webViewURL: self.$webViewURL),
                        isActive: .constant(!$webViewURL.wrappedValue.isEmpty)) {
-            Button(action: {
-                self.shouldPresentQRCodeScannerView = true
-            }) {
-                Image(Icon.camera).resizable().aspectRatio(contentMode: .fit).frame(width: 22.0, height: 22.0)
-            }
+                        Button(action: {
+                            self.modalViewType = .qrCodeScanner
+                            self.shouldPresentModal = true
+                        }) {
+                            Image(Icon.camera)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50.0, height: 22.0, alignment: .trailing)
+                        }
         }
     }
     
@@ -91,47 +102,107 @@ struct RoomListView: View {
         QRCodeScannerView(codeTypes: [.qr]) { result in
             switch result {
             case .success(let code):
+                self.scanError = .none
+                self.shouldShowAlert = false
                 self.webViewURL = code
-                self.shouldPresentQRCodeScannerView = false
             case .failure(let error):
-                print(error.localizedDescription)
+                self.scanError = error
             }
+            
+            self.shouldPresentModal = false
         }
     }
     
+    var sheetView: AnyView {
+        switch modalViewType {
+            case .sort:
+                return AnyView(SortModalView(shouldPresentSortView: self.$shouldPresentModal,
+                          selectedSortType: self.$viewModel.selectedSortType))
+            case .qrCodeScanner: return AnyView(qrCodeScanningView)
+            case .none: break
+        }
+        
+        return AnyView(EmptyView())
+    }
+    
     var body: some View {
-        LoadingView(isShowing: $viewModel.isLoading) {
-            NavigationView {
-                VStack {
-                    self.dateInputView
-                    Spacer()
-                    self.timeInputView.disabled(self.viewModel.date.isEmpty)
-                    Spacer()
-                    if !self.viewModel.updatedRooms.isEmpty {
-                        self.roomListView.layoutPriority(1.0)
-                    } else {
-                        Spacer().layoutPriority(1.0)
+        ZStack {
+            if $viewModel.networkStatus.wrappedValue == .satisfied {
+                LoadingView(isShowing: $viewModel.isLoading) {
+                    NavigationView {
+                        VStack {
+                            self.dateInputView
+                            Spacer()
+                            self.timeInputView.disabled(self.viewModel.date.isEmpty)
+                            Spacer()
+                            if !self.viewModel.updatedRooms.isEmpty {
+                                self.roomListView.layoutPriority(1.0)
+                            } else {
+                                Spacer().layoutPriority(1.0)
+                            }
+                        }
+                        .padding(14.0)
+                        .navigationBarTitle(Text(PageTitle.bookRoom), displayMode: .inline)
+                        .sheet(isPresented: self.$shouldPresentModal, onDismiss: {
+                            self.handleSheetDismiss()
+                        }) {
+                            self.sheetView
+                        }
+                        .navigationBarItems(trailing: self.cameraButton)
+                        .alert(isPresented: self.$shouldShowAlert)  {
+                            self.handleAlerts()
+                        }
                     }
                 }
-                .padding(14.0)
-                .navigationBarTitle(Text(PageTitle.bookRoom), displayMode: .inline)
-                .sheet(isPresented: self.$shouldPresentSortView, onDismiss: {
-                    self.viewModel.applySort()
-                }) {
-                    SortModalView(shouldPresentSortView: self.$shouldPresentSortView,
-                                  selectedSortType: self.$viewModel.selectedSortType)
-                }
-                .navigationBarItems(trailing: self.cameraButton)
-                .sheet(isPresented: self.$shouldPresentQRCodeScannerView) {
-                    self.qrCodeScanningView
+            } else {
+                ZStack(alignment: .center) {
+                    VStack {
+                        Text("No internet connection\nPlease check your settings").multilineTextAlignment(.center).font(Font.body)
+                            .font(Font.system(size: 20.0)).padding(.bottom, 14.0)
+                        Button(action: {
+                            UIApplication.goToSettings()
+                        }) {
+                            Text("Go to Settings")
+                        }
+                    }
                 }
             }
+        }.onAppear {
+            self.viewModel.startMonitoringNetwork()
+        }.onDisappear {
+            self.viewModel.stopMonitoringNetwork()
         }
     }
     
     private func getRooms() {
         if self.viewModel.isFormValidated {
             self.viewModel.getRooms()
+        }
+    }
+    
+    private func handleSheetDismiss() {
+        switch modalViewType {
+        case .sort: viewModel.applySort()
+        case .qrCodeScanner: showAlertIfError()
+        case .none: break
+        }
+        
+        self.modalViewType = .none
+    }
+    
+    private func showAlertIfError() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            if self.$scanError.wrappedValue != .none {
+                self.shouldShowAlert = true
+            }
+        }
+    }
+    
+    private func handleAlerts() -> Alert {
+        switch scanError {
+        case .invalid: return Alert.invalidQRCodeAlert
+        case .noPermission: return Alert.cameraPermissionAlert
+        case .none: return Alert.init(title: Text(verbatim: .empty))
         }
     }
     

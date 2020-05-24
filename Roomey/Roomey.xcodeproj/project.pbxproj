@@ -42,6 +42,9 @@
 		ABC7AFA72478253B0029FFF9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC7AFA52478253B0029FFF9 /* LoadingView.swift */; };
 		ABD1E662247A97A300C7C146 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1E661247A97A300C7C146 /* ConfirmationView.swift */; };
 		ABD1E668247AB19C00C7C146 /* SortModalViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1E667247AB19C00C7C146 /* SortModalViewModelSpec.swift */; };
+		ABD1E66B247AB5CF00C7C146 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1E66A247AB5CF00C7C146 /* NetworkHandler.swift */; };
+		ABD1E66D247AC46C00C7C146 /* Alert+RM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1E66C247AC46C00C7C146 /* Alert+RM.swift */; };
+		ABD1E66F247AC49D00C7C146 /* UIApplication+RM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD1E66E247AC49D00C7C146 /* UIApplication+RM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +111,9 @@
 		ABC7AFA52478253B0029FFF9 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		ABD1E661247A97A300C7C146 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		ABD1E667247AB19C00C7C146 /* SortModalViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalViewModelSpec.swift; sourceTree = "<group>"; };
+		ABD1E66A247AB5CF00C7C146 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
+		ABD1E66C247AC46C00C7C146 /* Alert+RM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+RM.swift"; sourceTree = "<group>"; };
+		ABD1E66E247AC49D00C7C146 /* UIApplication+RM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+RM.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +243,8 @@
 				ABC7AF7B2477CC9B0029FFF9 /* String+RM.swift */,
 				ABC7AF9F2477D79B0029FFF9 /* Numeric+RM.swift */,
 				AB3FAEB7247A66B50011C76B /* Array+RM.swift */,
+				ABD1E66C247AC46C00C7C146 /* Alert+RM.swift */,
+				ABD1E66E247AC49D00C7C146 /* UIApplication+RM.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -253,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				ABC7AF8F2477D2C70029FFF9 /* Home */,
+				ABD1E66A247AB5CF00C7C146 /* NetworkHandler.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -468,8 +477,10 @@
 				ABC7AF7E2477CE110029FFF9 /* AppEnvironment.swift in Sources */,
 				ABC7AF522477B5DA0029FFF9 /* AppDelegate.swift in Sources */,
 				AB3FAEB8247A66B50011C76B /* Array+RM.swift in Sources */,
+				ABD1E66F247AC49D00C7C146 /* UIApplication+RM.swift in Sources */,
 				AB3FAEB6247A32CE0011C76B /* SortModalViewModel.swift in Sources */,
 				ABC7AF8D2477D0A90029FFF9 /* RoomAvailability.swift in Sources */,
+				ABD1E66B247AB5CF00C7C146 /* NetworkHandler.swift in Sources */,
 				ABC7AFA72478253B0029FFF9 /* LoadingView.swift in Sources */,
 				ABC7AFA62478253B0029FFF9 /* LoadingIndicator.swift in Sources */,
 				ABC7AFA02477D79B0029FFF9 /* Numeric+RM.swift in Sources */,
@@ -482,6 +493,7 @@
 				AB3FAEB4247A32800011C76B /* ImageConstants.swift in Sources */,
 				AB3FAEBA247A788B0011C76B /* QRCodeScanner.swift in Sources */,
 				ABC7AF912477D2D20029FFF9 /* RoomHandler.swift in Sources */,
+				ABD1E66D247AC46C00C7C146 /* Alert+RM.swift in Sources */,
 				ABB60BD724797C0000028B02 /* HorizontalLine.swift in Sources */,
 				ABC7AF7C2477CC9B0029FFF9 /* String+RM.swift in Sources */,
 				ABC7AF972477D46F0029FFF9 /* RoomListView.swift in Sources */,

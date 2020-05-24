@@ -6,6 +6,10 @@
 //  Copyright © 2020 Lawrence Tan. All rights reserved.
 //
 
+struct QRCode {
+    static var domain = "qrgo.page.link"
+}
+
 struct InfoText {
     static var loading = "Loading ..."
 }
