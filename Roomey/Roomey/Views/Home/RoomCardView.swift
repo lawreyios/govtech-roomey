@@ -11,7 +11,6 @@ import SwiftUI
 struct RoomCardView: View {
     
     var room: Room
-    var isAvailable: Bool
     
     var body: some View {
         ZStack {
@@ -23,7 +22,7 @@ struct RoomCardView: View {
                 Spacer()
                 Spacer()
                 VStack {
-                    Text(isAvailable
+                    Text(room.isAvailable
                         ? RoomAvailabilityCard.availableText
                         : RoomAvailabilityCard.notAvailableText).fontWeight(.light)
                     Text("\(room.capacity) \(RoomAvailabilityCard.paxText)")

@@ -30,6 +30,7 @@ struct TextFieldTitle {
 
 struct PageTitle {
     static var bookRoom = "Book a Room"
+    static var sort = "Sort"
 }
 
 struct SectionTitle {

@@ -29,7 +29,7 @@ class RoomAvailabilityHandler: APIHandler {
             }
             
             weakSelf.isLoading = false
-            weakSelf.rooms = rooms.sorted { $0.level < $1.level }
+            weakSelf.rooms = rooms.sorted { Int($0.level) ?? .zero < Int($1.level) ?? .zero }
         }
         
     }

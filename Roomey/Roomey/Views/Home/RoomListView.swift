@@ -12,6 +12,8 @@ struct RoomListView: View {
     
     @ObservedObject var viewModel = RoomListViewModel()
     
+    @State var shouldPresentSortView = false
+    
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -55,7 +57,7 @@ struct RoomListView: View {
             Spacer()
             Spacer()
             Button(action: {
-                
+                self.shouldPresentSortView = true
             }) {
                 Text(RMButtonText.sort).foregroundColor(Color.black).font(Font.system(size: 12.0))
             }
@@ -65,8 +67,8 @@ struct RoomListView: View {
     var roomListView: some View {
         List {
             Section(header: roomListHeaderView.listRowInsets(EdgeInsets())) {
-                ForEach(viewModel.rooms) { room in
-                    RoomCardView(room: room, isAvailable: self.viewModel.isRoomAvailableFor(room))
+                ForEach(viewModel.updatedRooms) { room in
+                    RoomCardView(room: room)
                 }
             }
         }
@@ -78,9 +80,9 @@ struct RoomListView: View {
                 VStack {
                     self.dateInputView
                     Spacer()
-                    self.timeInputView
+                    self.timeInputView.disabled(self.viewModel.date.isEmpty)
                     Spacer()
-                    if !self.viewModel.rooms.isEmpty {
+                    if !self.viewModel.updatedRooms.isEmpty {
                         self.roomListView.layoutPriority(1.0)
                     } else {
                         Spacer().layoutPriority(1.0)
@@ -88,6 +90,12 @@ struct RoomListView: View {
                 }
                 .padding(14.0)
                 .navigationBarTitle(Text(PageTitle.bookRoom), displayMode: .inline)
+                .sheet(isPresented: self.$shouldPresentSortView, onDismiss: {
+                    self.viewModel.applySort()
+                }) {
+                    SortModalView(shouldPresentSortView: self.$shouldPresentSortView,
+                                  selectedSortType: self.$viewModel.selectedSortType)
+                }
             }
         }
     }

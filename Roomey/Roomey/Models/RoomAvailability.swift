@@ -17,6 +17,7 @@ class Room: Identifiable, Decodable {
     var capacity = String.empty
     var level = String.empty
     var availability = [String: String]()
+    var isAvailable = false
     
     enum CodingKeys: String, CodingKey {
         case name

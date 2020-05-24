@@ -21,8 +21,10 @@ class RoomListViewModel: ObservableObject {
     
     @Published var isFormValidated = false
     @Published var isLoading = false
-    @Published var rooms = [Room]() { didSet { filterRooms() }}
-    @Published var availableRooms = [Room]()
+    var rooms = [Room]() { didSet { filterRooms() }}
+    var availableRooms = [Room]()
+    @Published var updatedRooms = [Room]()
+    @Published var selectedSortType = SortType.level
     
     private var disposables: Set<AnyCancellable> = []
     private var roomAvailabilityHandler = RoomAvailabilityHandler()
@@ -60,8 +62,6 @@ class RoomListViewModel: ObservableObject {
     }
     
     func filterRooms() {
-        availableRooms.removeAll()
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateTimeFormat.timeWithAMPM
         
@@ -75,11 +75,25 @@ class RoomListViewModel: ObservableObject {
                         && Timeslot(rawValue: Int(timeslot.value) ?? .zero) == .available
                 }.isEmpty
             }
+            
+            updateRoomAvailability()
         }
     }
     
-    func isRoomAvailableFor(_ room: Room) -> Bool {
-        return !availableRooms.filter { $0.name == room.name }.isEmpty
+    func updateRoomAvailability() {
+        updatedRooms = rooms.map { room in
+            let updatedRoom = room
+            updatedRoom.isAvailable = !availableRooms.filter { $0.name == room.name }.isEmpty
+            return updatedRoom
+        }
+    }
+    
+    func applySort() {
+        switch selectedSortType {
+        case .level: updatedRooms.sort { Int($0.level) ?? .zero < Int($1.level) ?? .zero }
+        case .capacity: updatedRooms.sort { Int($0.capacity) ?? .zero < Int($1.capacity) ?? .zero }
+        case .availability: updatedRooms.sort { $0.isAvailable && !$1.isAvailable }
+        }
     }
     
 }

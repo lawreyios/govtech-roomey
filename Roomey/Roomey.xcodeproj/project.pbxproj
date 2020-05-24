@@ -10,12 +10,16 @@
 		AB10A21C247970E50043A1B6 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = ABC7AF742477CC250029FFF9 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB10A21F247971290043A1B6 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AB10A21D247971290043A1B6 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB10A2202479712A0043A1B6 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AB10A21E247971290043A1B6 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AB3FAEB4247A32800011C76B /* ImageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEB3247A32800011C76B /* ImageConstants.swift */; };
+		AB3FAEB6247A32CE0011C76B /* SortModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEB5247A32CE0011C76B /* SortModalViewModel.swift */; };
+		AB3FAEB8247A66B50011C76B /* Array+RM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEB7247A66B50011C76B /* Array+RM.swift */; };
 		ABB3C35D2478EB9000D2AFBC /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3C35C2478EB9000D2AFBC /* StringConstants.swift */; };
 		ABB3C3652478F43B00D2AFBC /* RoomListSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3C3642478F43B00D2AFBC /* RoomListSpec.swift */; };
 		ABB3C3792478F4CA00D2AFBC /* ResponseDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3C3782478F4CA00D2AFBC /* ResponseDataFactory.swift */; };
 		ABB3C37C2478F90F00D2AFBC /* room-availability.json in Resources */ = {isa = PBXBuildFile; fileRef = ABC7AF672477C4DF0029FFF9 /* room-availability.json */; };
 		ABB60BD524797BDC00028B02 /* RoomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB60BD424797BDC00028B02 /* RoomCardView.swift */; };
 		ABB60BD724797C0000028B02 /* HorizontalLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB60BD624797C0000028B02 /* HorizontalLine.swift */; };
+		ABB60BD92479828E00028B02 /* SortModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB60BD82479828E00028B02 /* SortModalView.swift */; };
 		ABC7AF522477B5DA0029FFF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC7AF512477B5DA0029FFF9 /* AppDelegate.swift */; };
 		ABC7AF542477B5DA0029FFF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC7AF532477B5DA0029FFF9 /* SceneDelegate.swift */; };
 		ABC7AF582477B5DE0029FFF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABC7AF572477B5DE0029FFF9 /* Assets.xcassets */; };
@@ -64,6 +68,9 @@
 /* Begin PBXFileReference section */
 		AB10A21D247971290043A1B6 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		AB10A21E247971290043A1B6 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		AB3FAEB3247A32800011C76B /* ImageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
+		AB3FAEB5247A32CE0011C76B /* SortModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalViewModel.swift; sourceTree = "<group>"; };
+		AB3FAEB7247A66B50011C76B /* Array+RM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RM.swift"; sourceTree = "<group>"; };
 		ABB3C35C2478EB9000D2AFBC /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		ABB3C3622478F43B00D2AFBC /* RoomeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoomeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB3C3642478F43B00D2AFBC /* RoomListSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListSpec.swift; sourceTree = "<group>"; };
@@ -71,6 +78,7 @@
 		ABB3C3782478F4CA00D2AFBC /* ResponseDataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataFactory.swift; sourceTree = "<group>"; };
 		ABB60BD424797BDC00028B02 /* RoomCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCardView.swift; sourceTree = "<group>"; };
 		ABB60BD624797C0000028B02 /* HorizontalLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLine.swift; sourceTree = "<group>"; };
+		ABB60BD82479828E00028B02 /* SortModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalView.swift; sourceTree = "<group>"; };
 		ABC7AF4E2477B5DA0029FFF9 /* Roomey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Roomey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC7AF512477B5DA0029FFF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABC7AF532477B5DA0029FFF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				ABB3C35C2478EB9000D2AFBC /* StringConstants.swift */,
+				AB3FAEB3247A32800011C76B /* ImageConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -218,6 +227,7 @@
 			children = (
 				ABC7AF7B2477CC9B0029FFF9 /* String+RM.swift */,
 				ABC7AF9F2477D79B0029FFF9 /* Numeric+RM.swift */,
+				AB3FAEB7247A66B50011C76B /* Array+RM.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -261,6 +271,8 @@
 				ABB60BD424797BDC00028B02 /* RoomCardView.swift */,
 				ABC7AF962477D46F0029FFF9 /* RoomListView.swift */,
 				ABC7AF982477D4760029FFF9 /* RoomListViewModel.swift */,
+				ABB60BD82479828E00028B02 /* SortModalView.swift */,
+				AB3FAEB5247A32CE0011C76B /* SortModalViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -425,14 +437,18 @@
 				ABC7AF992477D4760029FFF9 /* RoomListViewModel.swift in Sources */,
 				ABC7AF7E2477CE110029FFF9 /* AppEnvironment.swift in Sources */,
 				ABC7AF522477B5DA0029FFF9 /* AppDelegate.swift in Sources */,
+				AB3FAEB8247A66B50011C76B /* Array+RM.swift in Sources */,
+				AB3FAEB6247A32CE0011C76B /* SortModalViewModel.swift in Sources */,
 				ABC7AF8D2477D0A90029FFF9 /* RoomAvailability.swift in Sources */,
 				ABC7AFA72478253B0029FFF9 /* LoadingView.swift in Sources */,
 				ABC7AFA62478253B0029FFF9 /* LoadingIndicator.swift in Sources */,
 				ABC7AFA02477D79B0029FFF9 /* Numeric+RM.swift in Sources */,
+				ABB60BD92479828E00028B02 /* SortModalView.swift in Sources */,
 				ABB3C35D2478EB9000D2AFBC /* StringConstants.swift in Sources */,
 				ABC7AF542477B5DA0029FFF9 /* SceneDelegate.swift in Sources */,
 				ABC7AF6B2477C8A70029FFF9 /* APIHandler.swift in Sources */,
 				ABC7AF792477CC560029FFF9 /* NetworkError.swift in Sources */,
+				AB3FAEB4247A32800011C76B /* ImageConstants.swift in Sources */,
 				ABC7AF912477D2D20029FFF9 /* RoomHandler.swift in Sources */,
 				ABB60BD724797C0000028B02 /* HorizontalLine.swift in Sources */,
 				ABC7AF7C2477CC9B0029FFF9 /* String+RM.swift in Sources */,
