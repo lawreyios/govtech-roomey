@@ -60,10 +60,23 @@ struct DateTimePickerTextField: UIViewRepresentable {
         }
         
         @objc func handleDatePickerInput(from picker: UIDatePicker) {
+            
+            var selectedDate = picker.date
+            
             dateFormatter.dateFormat = mode == .date
                 ? DateTimeFormat.dateWithMonthName
                 : DateTimeFormat.timeWithAMPM
-            text = dateFormatter.string(from: picker.date.nearestThirtySeconds())
+            
+            if mode == .time {
+                var time = NSCalendar.current.dateComponents([.hour, .minute], from: picker.date)
+                var minute = time.minute
+                let minuteUnit = ceil(Double(minute ?? .zero) / 30.0)
+                minute = Int(minuteUnit * 30.0)
+                time.minute = minute
+                selectedDate = NSCalendar.current.date(from: time) ?? picker.date
+            }
+            
+            text = dateFormatter.string(from: selectedDate)
         }
     }
 
