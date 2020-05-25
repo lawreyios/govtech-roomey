@@ -24,7 +24,7 @@
 
 1. Open **Roomey.xcodeproj** with Xcode.
 2. Ensure **Scheme** is at **Roomey-DEV**.
-3. If you are running on **Simulator**, you have to upload an image to simulate hard-coded data, else you can connect your **real iOS device** or iOS 13.5 and above to run the native QR Code Scanner.
+3. If you are running on **Simulator**, you have to upload an image to simulate hard-coded data, else you can connect your **actual iOS device** of **iOS 13.5 and above** to run the native QR Code Scanner.
 3. Run the app with **►**.
 
 ## Run the app's test suite
