@@ -34,7 +34,7 @@ struct DateTimePickerTextField: UIViewRepresentable {
         private lazy var datePickerView: UIDatePicker = {
             let datePicker = UIDatePicker()
             datePicker.datePickerMode = mode
-            datePicker.minimumDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date())
+            datePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())
             datePicker.maximumDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date())
             datePicker.minuteInterval = 30
             datePicker.addTarget(self, action: #selector(handleDatePickerInput(from:)), for: .valueChanged)
