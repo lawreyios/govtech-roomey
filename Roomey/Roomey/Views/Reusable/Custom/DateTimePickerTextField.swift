@@ -59,7 +59,9 @@ struct DateTimePickerTextField: UIViewRepresentable {
         }
         
         func textFieldDidEndEditing(_ textField: UITextField) {
-            onSearch()
+            if mode == .time {
+                onSearch()
+            }
         }
         
         @objc func handleDatePickerInput(from picker: UIDatePicker) {
