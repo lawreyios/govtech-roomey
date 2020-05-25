@@ -16,6 +16,8 @@ class RoomListViewModel: ObservableObject, NetworkCheckObserver {
         case qrCodeScanner, sort, none
     }
     
+    @Published var selectedDate = Date()
+    
     @Published var date = String.empty {
         didSet { isFormValidated = !date.isEmpty && !time.isEmpty }
     }
