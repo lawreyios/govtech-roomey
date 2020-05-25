@@ -12,6 +12,10 @@ import Network
 
 class RoomListViewModel: ObservableObject, NetworkCheckObserver {
     
+    enum ModalViewType: Int {
+        case qrCodeScanner, sort, none
+    }
+    
     @Published var date = String.empty {
         didSet { isFormValidated = !date.isEmpty && !time.isEmpty }
     }
@@ -27,6 +31,12 @@ class RoomListViewModel: ObservableObject, NetworkCheckObserver {
     @Published var updatedRooms = [Room]()
     @Published var selectedSortType = SortType.level
     @Published var networkStatus = NWPath.Status.unsatisfied
+    @Published var scanError = QRCodeScannerView.ScanError.none
+    @Published var modalViewType = ModalViewType.none
+    @Published var webViewURL = String.empty
+    @Published var shouldShowAlert = false
+    @Published var shouldPresentModal = false
+    @Published var isDateFieldFirstResponder = true
     
     private var networkCheck = NetworkCheck.sharedInstance()
     private var disposables: Set<AnyCancellable> = []
@@ -70,7 +80,10 @@ class RoomListViewModel: ObservableObject, NetworkCheckObserver {
     }
     
     func getRooms() {
-        roomAvailabilityHandler.getRooms()
+        if self.isFormValidated {
+            isDateFieldFirstResponder = false
+            roomAvailabilityHandler.getRooms()
+        }
     }
     
     func filterRooms() {
@@ -111,4 +124,47 @@ class RoomListViewModel: ObservableObject, NetworkCheckObserver {
     func statusDidChange(status: NWPath.Status) {
         networkStatus = status
     }
+    
+    func presentSortView() {
+        isDateFieldFirstResponder = false
+        modalViewType = .sort
+        shouldPresentModal = true
+    }
+    
+    func presentQRCodeScannerView() {
+        isDateFieldFirstResponder = false
+        webViewURL = .empty
+        modalViewType = .qrCodeScanner
+        shouldPresentModal = true
+    }
+    
+    func showAlertWithDelay() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            if self.scanError != .none {
+                self.shouldShowAlert = true
+            }
+        }
+    }
+    
+    func handleQRCodeScanInput(_ result: Result<String, QRCodeScannerView.ScanError>) {
+        switch result {
+        case .success(let code):
+            self.scanError = .none
+            self.shouldShowAlert = false
+            self.webViewURL = code
+        case .failure(let error):
+            self.scanError = error
+        }
+        
+        self.shouldPresentModal = false
+    }
+    
+    func handleSheetDismiss() {
+        switch modalViewType {
+        case .sort: applySort()
+        case .qrCodeScanner: showAlertWithDelay()
+        case .none: break
+        }
+    }
+    
 }

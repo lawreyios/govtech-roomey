@@ -22,12 +22,14 @@ struct DateTimePickerTextField: UIViewRepresentable {
     @Binding var text: String
     var mode: UIDatePicker.Mode
     var onSearch: () -> Void
+    var isFirstResponder = false
     
     class Coordinator: NSObject, UITextFieldDelegate {
 
         @Binding var text: String
         var mode: UIDatePicker.Mode
         var onSearch: () -> Void
+        var didBecomeFirstResponder = false
         
         private lazy var datePickerView: UIDatePicker = {
             let datePicker = UIDatePicker()
@@ -66,6 +68,8 @@ struct DateTimePickerTextField: UIViewRepresentable {
         let textField = NonPastableTextField(frame: .zero)
         textField.delegate = context.coordinator
         textField.textColor = .black
+        textField.font = UIFont(name: SMFont.regular, size: 14.0)
+        if mode == .date { textField.inputAccessoryView = UIView() }
         return textField
     }
 
@@ -75,6 +79,10 @@ struct DateTimePickerTextField: UIViewRepresentable {
 
     func updateUIView(_ uiView: NonPastableTextField, context: UIViewRepresentableContext<DateTimePickerTextField>) {
         uiView.text = text
+        if isFirstResponder && !context.coordinator.didBecomeFirstResponder  {
+            uiView.becomeFirstResponder()
+            context.coordinator.didBecomeFirstResponder = true
+        }
     }
 
 }

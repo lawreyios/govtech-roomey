@@ -24,10 +24,20 @@ struct ConfirmationView: View {
             }
             Spacer()
             Spacer()
-            Button(action: {
-                self.dismiss()
-            }) {
-                Text("Back to Home")
+            if self.$confirmationWebViewModel.isLoadingCompleted.wrappedValue {
+                Button(action: {
+                    self.dismiss()
+                }) {
+                    HStack {
+                        Spacer()
+                        Text(RMButtonText.backToHome).modifier(FontModifier(appFont: .bold, size: 20, color: .white))
+                        Spacer()
+                    }
+                    .frame(height: 55.0)
+                    .background(Color.appColor(.crayonBlue))
+                    .cornerRadius(20.0, corners: .allCorners)
+                    .padding(.horizontal, 14.0)
+                }
             }
         }.onAppear {
             if let url = URL(string: self.webViewURL) {
@@ -55,4 +65,10 @@ struct ConfirmationView: View {
         presentationMode.wrappedValue.dismiss()
     }
     
+}
+
+struct ConfirmationView_Previews: PreviewProvider {
+    static var previews: some View {
+        ConfirmationView(webViewURL: .constant(""))
+    }
 }

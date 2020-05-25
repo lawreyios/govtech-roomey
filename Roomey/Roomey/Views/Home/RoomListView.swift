@@ -10,18 +10,8 @@ import SwiftUI
 
 struct RoomListView: View {
     
-    enum ModalViewType: Int {
-        case qrCodeScanner, sort, none
-    }
-    
     @ObservedObject var viewModel = RoomListViewModel()
-    
-    @State var shouldPresentModal = false
-    @State var shouldShowAlert = false
-    @State var webViewURL = String.empty
-    @State var scanError = QRCodeScannerView.ScanError.none
-    @State var modalViewType = ModalViewType.none
-    
+        
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -37,23 +27,31 @@ struct RoomListView: View {
         
         UITableViewCell.appearance().selectionStyle = .none
         UITableViewCell.appearance().backgroundColor = .white
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.shadowColor = .clear
+        appearance.backgroundColor = .white
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
     
     var dateInputView: some View {
         VStack(alignment: .leading) {
-            Text(TextFieldTitle.date).foregroundColor(Color.gray).font(Font.system(size: 12.0))
+            Text(TextFieldTitle.date)
+                .modifier(FontModifier(appFont: .regular, size: 12.0, color: Color.appColor(.submarine)))
             DateTimePickerTextField(text: $viewModel.date, mode: .date, onSearch: {
-                self.getRooms()
-            })
+                self.viewModel.getRooms()
+            }, isFirstResponder: viewModel.isDateFieldFirstResponder)
             HorizontalLine()
         }
     }
     
     var timeInputView: some View {
         VStack(alignment: .leading) {
-            Text(TextFieldTitle.timeslot).foregroundColor(Color.gray).font(Font.system(size: 12.0))
+            Text(TextFieldTitle.timeslot)
+                .modifier(FontModifier(appFont: .regular, size: 12.0, color: Color.appColor(.submarine)))
             DateTimePickerTextField(text: $viewModel.time, mode: .time, onSearch: {
-                self.getRooms()
+                self.viewModel.getRooms()
             })
             HorizontalLine()
         }
@@ -61,35 +59,42 @@ struct RoomListView: View {
     
     var roomListHeaderView: some View {
         HStack {
-            Text(SectionTitle.rooms).foregroundColor(Color.gray).font(Font.system(size: 12.0))
+            Text(SectionTitle.rooms)
+                .modifier(FontModifier(appFont: .regular, size: 12.0, color: Color.appColor(.submarine)))
             Spacer()
             Spacer()
-            Button(action: {
-                self.modalViewType = .sort
-                self.shouldPresentModal = true
-            }) {
-                Text(RMButtonText.sort).foregroundColor(Color.black).font(Font.system(size: 12.0))
+            Button(action: { self.viewModel.presentSortView() }) {
+                HStack {
+                    Spacer()
+                    Text(RMButtonText.sort)
+                        .modifier(FontModifier(appFont: .bold, size: 12.0, color: .black))
+                        .multilineTextAlignment(.trailing)
+                    Image(Icon.sort)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 22.0, height: 22.0, alignment: .trailing)
+                        .foregroundColor(.black)
+                }
             }
-        }.background(Color.white)
+        }
+        .frame(height: 44.0)
+        .background(Color.white)
     }
     
     var roomListView: some View {
         List {
             Section(header: roomListHeaderView.listRowInsets(EdgeInsets())) {
                 ForEach(viewModel.updatedRooms) { room in
-                    RoomCardView(room: room)
+                    RoomCardView(room: room).padding(.horizontal, -20.0)
                 }
             }
-        }
+        }.padding(.top, 28.0)
     }
     
     var cameraButton: some View {
-        NavigationLink(destination: ConfirmationView(webViewURL: self.$webViewURL),
-                       isActive: .constant(!$webViewURL.wrappedValue.isEmpty)) {
-                        Button(action: {
-                            self.modalViewType = .qrCodeScanner
-                            self.shouldPresentModal = true
-                        }) {
+        NavigationLink(destination: ConfirmationView(webViewURL: self.$viewModel.webViewURL),
+                       isActive: .constant(!$viewModel.webViewURL.wrappedValue.isEmpty)) {
+                        Button(action: { self.viewModel.presentQRCodeScannerView() }) {
                             Image(Icon.camera)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -100,23 +105,14 @@ struct RoomListView: View {
     
     var qrCodeScanningView: some View {
         QRCodeScannerView(codeTypes: [.qr]) { result in
-            switch result {
-            case .success(let code):
-                self.scanError = .none
-                self.shouldShowAlert = false
-                self.webViewURL = code
-            case .failure(let error):
-                self.scanError = error
-            }
-            
-            self.shouldPresentModal = false
+            self.viewModel.handleQRCodeScanInput(result)
         }
     }
     
     var sheetView: AnyView {
-        switch modalViewType {
+        switch viewModel.modalViewType {
             case .sort:
-                return AnyView(SortModalView(shouldPresentSortView: self.$shouldPresentModal,
+                return AnyView(SortModalView(shouldPresentSortView: self.$viewModel.shouldPresentModal,
                           selectedSortType: self.$viewModel.selectedSortType))
             case .qrCodeScanner: return AnyView(qrCodeScanningView)
             case .none: break
@@ -132,8 +128,7 @@ struct RoomListView: View {
                     NavigationView {
                         VStack {
                             self.dateInputView
-                            Spacer()
-                            self.timeInputView.disabled(self.viewModel.date.isEmpty)
+                            self.timeInputView.disabled(self.viewModel.date.isEmpty).padding(.top, 28.0)
                             Spacer()
                             if !self.viewModel.updatedRooms.isEmpty {
                                 self.roomListView.layoutPriority(1.0)
@@ -141,15 +136,15 @@ struct RoomListView: View {
                                 Spacer().layoutPriority(1.0)
                             }
                         }
-                        .padding(14.0)
+                        .padding(28.0)
                         .navigationBarTitle(Text(PageTitle.bookRoom), displayMode: .inline)
-                        .sheet(isPresented: self.$shouldPresentModal, onDismiss: {
-                            self.handleSheetDismiss()
+                        .sheet(isPresented: self.$viewModel.shouldPresentModal, onDismiss: {
+                            self.viewModel.handleSheetDismiss()
                         }) {
                             self.sheetView
                         }
                         .navigationBarItems(trailing: self.cameraButton)
-                        .alert(isPresented: self.$shouldShowAlert)  {
+                        .alert(isPresented: self.$viewModel.shouldShowAlert)  {
                             self.handleAlerts()
                         }
                     }
@@ -157,12 +152,12 @@ struct RoomListView: View {
             } else {
                 ZStack(alignment: .center) {
                     VStack {
-                        Text("No internet connection\nPlease check your settings").multilineTextAlignment(.center).font(Font.body)
+                        Text(InfoText.noInternet).multilineTextAlignment(.center).font(Font.body)
                             .font(Font.system(size: 20.0)).padding(.bottom, 14.0)
                         Button(action: {
                             UIApplication.goToSettings()
                         }) {
-                            Text("Go to Settings")
+                            Text(RMButtonText.settings)
                         }
                     }
                 }
@@ -174,32 +169,8 @@ struct RoomListView: View {
         }
     }
     
-    private func getRooms() {
-        if self.viewModel.isFormValidated {
-            self.viewModel.getRooms()
-        }
-    }
-    
-    private func handleSheetDismiss() {
-        switch modalViewType {
-        case .sort: viewModel.applySort()
-        case .qrCodeScanner: showAlertIfError()
-        case .none: break
-        }
-        
-        self.modalViewType = .none
-    }
-    
-    private func showAlertIfError() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-            if self.$scanError.wrappedValue != .none {
-                self.shouldShowAlert = true
-            }
-        }
-    }
-    
     private func handleAlerts() -> Alert {
-        switch scanError {
+        switch viewModel.scanError {
         case .invalid: return Alert.invalidQRCodeAlert
         case .noPermission: return Alert.cameraPermissionAlert
         case .none: return Alert.init(title: Text(verbatim: .empty))

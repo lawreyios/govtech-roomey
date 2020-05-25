@@ -62,15 +62,32 @@ struct SortModalView: View {
                 self.selectedSortType = self.viewModel.resetSortType()
                 self.shouldPresentSortView = false
             }) {
-                Text("Reset")
+                HStack {
+                    Spacer()
+                    Text(RMButtonText.reset).modifier(FontModifier(appFont: .bold, size: 20.0, color: .white))
+                    Spacer()
+                }
+                .frame(minWidth: 125.0)
+                .frame(height: 55.0)
+                .background(Color.appColor(.arsenic))
+                .cornerRadius(20.0, corners: .allCorners)
             }.layoutPriority(.zero)
             Spacer()
             Button(action: {
                 self.selectedSortType = self.viewModel.applySortType(self.currentSortType)
                 self.shouldPresentSortView = false
             }) {
-                Text("Apply")
-            }.layoutPriority(1.0)
+                HStack {
+                    Spacer()
+                    Text(RMButtonText.apply).modifier(FontModifier(appFont: .bold, size: 20, color: .white))
+                    Spacer()
+                }
+                .frame(height: 55.0)
+                .background(Color.appColor(.crayonBlue))
+                .cornerRadius(20.0, corners: .allCorners)
+            }
+            .layoutPriority(1.0)
+            .padding(.leading, 6.0)
         }
     }
     
@@ -82,17 +99,20 @@ struct SortModalView: View {
                         SortRow(selectedSortType: self.$currentSortType, sortType: .level).onTapGesture {
                             self.currentSortType = .level
                         }
+                        Divider()
                         SortRow(selectedSortType: self.$currentSortType, sortType: .capacity).onTapGesture {
                             self.currentSortType = .capacity
                         }
+                        Divider()
                         SortRow(selectedSortType: self.$currentSortType, sortType: .availability).onTapGesture {
                             self.currentSortType = .availability
                         }
+                        Divider()
                     }
                 }
                 Spacer()
                 Spacer()
-                footerView
+                footerView.padding(.horizontal, 16.0)
             }
             .padding(12.0)
             .navigationBarTitle(Text(PageTitle.sort), displayMode: .inline)
@@ -102,4 +122,10 @@ struct SortModalView: View {
         }
     }
     
+}
+
+struct SortModalView_Previews: PreviewProvider {
+    static var previews: some View {
+        SortModalView(shouldPresentSortView: .constant(true), selectedSortType: .constant(.level))
+    }
 }

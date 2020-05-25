@@ -15,6 +15,14 @@
 		AB3FAEB8247A66B50011C76B /* Array+RM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEB7247A66B50011C76B /* Array+RM.swift */; };
 		AB3FAEBA247A788B0011C76B /* QRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEB9247A788B0011C76B /* QRCodeScanner.swift */; };
 		AB3FAEBC247A7B230011C76B /* ConfirmationWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FAEBB247A7B230011C76B /* ConfirmationWebView.swift */; };
+		AB96BFAA247B78B2007252CE /* Font+RM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB96BFA9247B78B2007252CE /* Font+RM.swift */; };
+		AB96BFB1247B78F6007252CE /* Chivo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB96BFAC247B78F5007252CE /* Chivo-Regular.otf */; };
+		AB96BFB3247B78F6007252CE /* Chivo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB96BFAE247B78F6007252CE /* Chivo-Bold.otf */; };
+		AB96BFB4247B78F6007252CE /* Chivo-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB96BFAF247B78F6007252CE /* Chivo-ExtraBold.otf */; };
+		AB96BFB5247B78F6007252CE /* Chivo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB96BFB0247B78F6007252CE /* Chivo-Medium.otf */; };
+		AB96BFBA247B7AB4007252CE /* Color+RM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB96BFB9247B7AB4007252CE /* Color+RM.swift */; };
+		AB96BFBC247B831B007252CE /* View+RM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB96BFBB247B831B007252CE /* View+RM.swift */; };
+		AB96BFBE247B8531007252CE /* Chivo-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB96BFBD247B8531007252CE /* Chivo-LightItalic.otf */; };
 		ABB3C35D2478EB9000D2AFBC /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3C35C2478EB9000D2AFBC /* StringConstants.swift */; };
 		ABB3C3652478F43B00D2AFBC /* RoomListSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3C3642478F43B00D2AFBC /* RoomListSpec.swift */; };
 		ABB3C3792478F4CA00D2AFBC /* ResponseDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3C3782478F4CA00D2AFBC /* ResponseDataFactory.swift */; };
@@ -80,6 +88,14 @@
 		AB3FAEB7247A66B50011C76B /* Array+RM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RM.swift"; sourceTree = "<group>"; };
 		AB3FAEB9247A788B0011C76B /* QRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScanner.swift; sourceTree = "<group>"; };
 		AB3FAEBB247A7B230011C76B /* ConfirmationWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationWebView.swift; sourceTree = "<group>"; };
+		AB96BFA9247B78B2007252CE /* Font+RM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+RM.swift"; sourceTree = "<group>"; };
+		AB96BFAC247B78F5007252CE /* Chivo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-Regular.otf"; sourceTree = "<group>"; };
+		AB96BFAE247B78F6007252CE /* Chivo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-Bold.otf"; sourceTree = "<group>"; };
+		AB96BFAF247B78F6007252CE /* Chivo-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-ExtraBold.otf"; sourceTree = "<group>"; };
+		AB96BFB0247B78F6007252CE /* Chivo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-Medium.otf"; sourceTree = "<group>"; };
+		AB96BFB9247B7AB4007252CE /* Color+RM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+RM.swift"; sourceTree = "<group>"; };
+		AB96BFBB247B831B007252CE /* View+RM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+RM.swift"; sourceTree = "<group>"; };
+		AB96BFBD247B8531007252CE /* Chivo-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chivo-LightItalic.otf"; sourceTree = "<group>"; };
 		ABB3C35C2478EB9000D2AFBC /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		ABB3C3622478F43B00D2AFBC /* RoomeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoomeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB3C3642478F43B00D2AFBC /* RoomListSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListSpec.swift; sourceTree = "<group>"; };
@@ -134,6 +150,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB96BFAB247B78E7007252CE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AB96BFAE247B78F6007252CE /* Chivo-Bold.otf */,
+				AB96BFAF247B78F6007252CE /* Chivo-ExtraBold.otf */,
+				AB96BFBD247B8531007252CE /* Chivo-LightItalic.otf */,
+				AB96BFB0247B78F6007252CE /* Chivo-Medium.otf */,
+				AB96BFAC247B78F5007252CE /* Chivo-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		ABB3C35B2478EB8400D2AFBC /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +229,7 @@
 		ABC7AF652477C4B90029FFF9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AB96BFAB247B78E7007252CE /* Fonts */,
 				ABC7AF572477B5DE0029FFF9 /* Assets.xcassets */,
 				ABC7AF5C2477B5DE0029FFF9 /* LaunchScreen.storyboard */,
 				ABC7AF5F2477B5DE0029FFF9 /* Info.plist */,
@@ -245,6 +274,9 @@
 				AB3FAEB7247A66B50011C76B /* Array+RM.swift */,
 				ABD1E66C247AC46C00C7C146 /* Alert+RM.swift */,
 				ABD1E66E247AC49D00C7C146 /* UIApplication+RM.swift */,
+				AB96BFA9247B78B2007252CE /* Font+RM.swift */,
+				AB96BFB9247B7AB4007252CE /* Color+RM.swift */,
+				AB96BFBB247B831B007252CE /* View+RM.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -424,8 +456,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB96BFBE247B8531007252CE /* Chivo-LightItalic.otf in Resources */,
+				AB96BFB5247B78F6007252CE /* Chivo-Medium.otf in Resources */,
 				ABC7AF5E2477B5DE0029FFF9 /* LaunchScreen.storyboard in Resources */,
+				AB96BFB1247B78F6007252CE /* Chivo-Regular.otf in Resources */,
 				ABC7AF5B2477B5DE0029FFF9 /* Preview Assets.xcassets in Resources */,
+				AB96BFB3247B78F6007252CE /* Chivo-Bold.otf in Resources */,
+				AB96BFB4247B78F6007252CE /* Chivo-ExtraBold.otf in Resources */,
 				ABC7AF582477B5DE0029FFF9 /* Assets.xcassets in Resources */,
 				ABC7AF682477C4DF0029FFF9 /* room-availability.json in Resources */,
 			);
@@ -478,6 +515,7 @@
 				ABC7AF522477B5DA0029FFF9 /* AppDelegate.swift in Sources */,
 				AB3FAEB8247A66B50011C76B /* Array+RM.swift in Sources */,
 				ABD1E66F247AC49D00C7C146 /* UIApplication+RM.swift in Sources */,
+				AB96BFBC247B831B007252CE /* View+RM.swift in Sources */,
 				AB3FAEB6247A32CE0011C76B /* SortModalViewModel.swift in Sources */,
 				ABC7AF8D2477D0A90029FFF9 /* RoomAvailability.swift in Sources */,
 				ABD1E66B247AB5CF00C7C146 /* NetworkHandler.swift in Sources */,
@@ -486,6 +524,7 @@
 				ABC7AFA02477D79B0029FFF9 /* Numeric+RM.swift in Sources */,
 				ABB60BD92479828E00028B02 /* SortModalView.swift in Sources */,
 				ABB3C35D2478EB9000D2AFBC /* StringConstants.swift in Sources */,
+				AB96BFBA247B7AB4007252CE /* Color+RM.swift in Sources */,
 				ABD1E662247A97A300C7C146 /* ConfirmationView.swift in Sources */,
 				ABC7AF542477B5DA0029FFF9 /* SceneDelegate.swift in Sources */,
 				ABC7AF6B2477C8A70029FFF9 /* APIHandler.swift in Sources */,
@@ -496,6 +535,7 @@
 				ABD1E66D247AC46C00C7C146 /* Alert+RM.swift in Sources */,
 				ABB60BD724797C0000028B02 /* HorizontalLine.swift in Sources */,
 				ABC7AF7C2477CC9B0029FFF9 /* String+RM.swift in Sources */,
+				AB96BFAA247B78B2007252CE /* Font+RM.swift in Sources */,
 				ABC7AF972477D46F0029FFF9 /* RoomListView.swift in Sources */,
 				ABB60BD524797BDC00028B02 /* RoomCardView.swift in Sources */,
 			);

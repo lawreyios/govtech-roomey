@@ -15,20 +15,30 @@ struct RoomCardView: View {
     var body: some View {
         ZStack {
             HStack {
-                VStack {
-                    Text(room.name).fontWeight(.bold)
+                VStack(alignment: .leading) {
+                    Text(room.name)
+                        .modifier(FontModifier(appFont: .medium, size: 16.0, color: Color.appColor(.charcoal)))
                     Text("\(RoomAvailabilityCard.levelText) \(room.level)")
+                        .modifier(FontModifier(appFont: .regular, size: 14.0, color: Color.appColor(.charcoal)))
+                        .padding(.top, 8.0)
                 }
                 Spacer()
                 Spacer()
-                VStack {
+                VStack(alignment: .trailing) {
                     Text(room.isAvailable
                         ? RoomAvailabilityCard.availableText
-                        : RoomAvailabilityCard.notAvailableText).fontWeight(.light)
+                        : RoomAvailabilityCard.notAvailableText)
+                        .modifier(FontModifier(appFont: .lightItalic, size: 16.0, color: Color.appColor(room.isAvailable ? .chateauGreen : .starDust)))
                     Text("\(room.capacity) \(RoomAvailabilityCard.paxText)")
+                        .modifier(FontModifier(appFont: .regular, size: 14.0, color: Color.appColor(.charcoal)))
+                        .padding(.top, 8.0)
                 }
             }
-        }.padding(14.0)
+            .padding(.vertical, 14.0)
+            .padding(.horizontal, 28.0)
+        }
+        .background(Color.appColor(.whiteSmoke))
+        .cornerRadius(8.0, corners: .allCorners)
     }
     
 }

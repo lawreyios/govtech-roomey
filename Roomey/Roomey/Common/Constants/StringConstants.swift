@@ -12,6 +12,10 @@ struct QRCode {
 
 struct InfoText {
     static var loading = "Loading ..."
+    static var noInternet = "No internet connection\nPlease check your settings"
+    static var enableCamera = "Please enable Camera Permission"
+    static var invalidQRCode = "Invalid QR Code"
+    static var invalidQRCodeSubtitle = "Invalid QR Code"
 }
 
 struct RoomAvailabilityCard {
@@ -43,4 +47,17 @@ struct SectionTitle {
 
 struct RMButtonText {
     static var sort = "Sort"
+    static var reset = "Reset"
+    static var apply = "Apply"
+    static var backToHome = "Back to Home"
+    static var settings = "Settings"
+    static var ok = "OK"
+}
+
+struct SMFont {
+    static let regular = "Chivo-Regular"
+    static let bold = "Chivo-Bold"
+    static let extraBold = "Chivo-ExtraBold"
+    static let medium = "Chivo-Medium"
+    static let lightItalic = "Chivo-LightItalic"
 }

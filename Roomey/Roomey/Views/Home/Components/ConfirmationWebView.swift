@@ -47,21 +47,21 @@ struct ConfirmationWebView: View, UIViewRepresentable {
         }
         
         func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-            print("Getting Contents")
+            debugPrint("Getting Contents")
         }
         
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-            print(error.localizedDescription)
+            debugPrint(error.localizedDescription)
             viewModel.isLoadingCompleted = false
         }
         
         func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-            print(error.localizedDescription)
+            debugPrint(error.localizedDescription)
             viewModel.isLoadingCompleted = false
         }
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            print("Contents Loaded")
+            debugPrint("Contents Loaded")
             viewModel.isLoading = false
             viewModel.isLoadingCompleted = true
         }

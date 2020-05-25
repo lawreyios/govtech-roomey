@@ -24,7 +24,7 @@ class RoomAvailabilityHandler: APIHandler {
             
             guard let rooms = weakSelf.handleResponse(response).response as? [Room] else {
                 weakSelf.isLoading = false
-                print("Error Loading Data!")
+                debugPrint("Error Loading Data!")
                 return
             }
             

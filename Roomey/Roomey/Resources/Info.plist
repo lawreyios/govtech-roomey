@@ -22,6 +22,14 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Chivo-ExtraBold.otf</string>
+		<string>Chivo-Bold.otf</string>
+		<string>Chivo-LightItalic.otf</string>
+		<string>Chivo-Medium.otf</string>
+		<string>Chivo-Regular.otf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -21,12 +21,24 @@ class RoomListSpec: QuickSpec {
             beforeEach {
                 viewModel.date = "23 May 2020"
                 viewModel.time = "1:00 PM"
-                                
+                                                
                 viewModel.rooms = ResponseDataFactory.getRoomsDataFromJSON()!
                 viewModel.filterRooms()
             }
             
+            it("Then it should auto focus on date field") {
+                expect(viewModel.isDateFieldFirstResponder).to(beTrue())
+            }
+            
             context("When network connection is available") {
+                beforeEach {
+                    viewModel.getRooms()
+                }
+                
+                it("Then should reset date field from auto focusing") {
+                    expect(viewModel.isDateFieldFirstResponder).to(beFalse())
+                }
+                
                 it("Then room listing should be displayed, sorted by level in ascending order by default") {
                     expect(viewModel.updatedRooms.first!.level).to(equal("7"))
                     expect(viewModel.updatedRooms.middle!.level).to(equal("8"))
@@ -109,6 +121,46 @@ class RoomListSpec: QuickSpec {
             }
 
         }
+        
+        describe("Given user scans a QR code to book a room") {
+            context("The QR code is a valid code") {
+                beforeEach {
+                    viewModel.presentQRCodeScannerView()
+                    viewModel.handleQRCodeScanInput(.success("qrgo.page.link"))
+                }
+                
+                it("Then it should bring user to confimration page") {
+                    expect(viewModel.webViewURL).to(equal("qrgo.page.link"))
+                    expect(viewModel.shouldShowAlert).to(beFalse())
+                    expect(viewModel.scanError).to(equal(QRCodeScannerView.ScanError.none))
+                }
+            }
+            
+            context("The QR code is an invalid code") {
+                beforeEach {
+                    viewModel.presentQRCodeScannerView()
+                    viewModel.handleQRCodeScanInput(.failure(.invalid))
+                    viewModel.handleSheetDismiss()
+                }
+                
+                it("Then it should prompt user an error alert") {
+                    expect(viewModel.webViewURL).to(equal(""))
+                    expect(viewModel.scanError).to(equal(QRCodeScannerView.ScanError.invalid))
+                    expect(viewModel.shouldShowAlert).toEventually(beTrue())
+                }
+            }
+            
+            describe("Given user has not granted camera permission") {
+                beforeEach {
+                    viewModel.handleQRCodeScanInput(.failure(.noPermission))
+                }
+                
+                it("Then should show an error alert") {
+                    expect(viewModel.shouldShowAlert).toEventually(beTrue())
+                }
+            }
+        }
+
     }
     
 }
