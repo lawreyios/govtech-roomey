@@ -5,7 +5,7 @@
 <br/>
 
 ## App Demo
-<left>![roomey-app-icon](images/roomey-demo.gif)</<left>
+<left>![roomey-app-icon](images/roomey-demo.gif)</left>
 
 ## Pre-requisites
 
