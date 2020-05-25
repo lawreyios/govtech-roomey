@@ -51,11 +51,6 @@ struct DateTimePickerTextField: UIViewRepresentable {
         
         func textFieldDidBeginEditing(_ textField: UITextField) {
             textField.inputView = datePickerView
-            
-            if mode == .date {
-                dateFormatter.dateFormat = DateTimeFormat.dateWithMonthName
-                text = dateFormatter.string(from: Date())
-            }
         }
         
         func textFieldDidEndEditing(_ textField: UITextField) {
