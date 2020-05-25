@@ -30,12 +30,14 @@ struct DateTimePickerTextField: UIViewRepresentable {
         var mode: UIDatePicker.Mode
         var onSearch: () -> Void
         var didBecomeFirstResponder = false
+        var dateFormatter = DateFormatter()
         
         private lazy var datePickerView: UIDatePicker = {
             let datePicker = UIDatePicker()
+            datePicker.date = Date()
             datePicker.datePickerMode = mode
-            datePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())
-            datePicker.maximumDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date())
+            datePicker.minimumDate = Calendar.current.date(byAdding: .minute, value: 30, to: Date())
+            datePicker.maximumDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())
             datePicker.minuteInterval = 30
             datePicker.addTarget(self, action: #selector(handleDatePickerInput(from:)), for: .valueChanged)
             return datePicker
@@ -52,15 +54,16 @@ struct DateTimePickerTextField: UIViewRepresentable {
         }
         
         func textFieldDidEndEditing(_ textField: UITextField) {
-            onSearch()
+            if mode == .time {
+                onSearch()
+            }
         }
         
         @objc func handleDatePickerInput(from picker: UIDatePicker) {
-            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = mode == .date
                 ? DateTimeFormat.dateWithMonthName
                 : DateTimeFormat.timeWithAMPM
-            text = dateFormatter.string(from: picker.date)
+            text = dateFormatter.string(from: picker.date.nearestThirtySeconds())
         }
     }
 
