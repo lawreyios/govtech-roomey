@@ -44,6 +44,8 @@ public struct QRCodeScannerView: UIViewControllerRepresentable {
                 return
             }
             
+            print(code)
+            
             parent.completion(.success(code))
         }
 
@@ -93,7 +95,7 @@ public struct QRCodeScannerView: UIViewControllerRepresentable {
         }
 
         override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            delegate?.found(code: "simulatedData")
+            delegate?.found(code: "https://qrgo.page.link/N3vzh")
         }
 
         @objc func openGallery(_ sender: UIButton){
@@ -106,18 +108,14 @@ public struct QRCodeScannerView: UIViewControllerRepresentable {
             if let qrcodeImg = info[.originalImage] as? UIImage {
                 let detector:CIDetector=CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])!
                 let ciImage:CIImage=CIImage(image:qrcodeImg)!
-                var qrCodeLink = ""
+                var qrCodeLink = "https://qrgo.page.link/N3vzh"
 
                 let features=detector.features(in: ciImage)
                 for feature in features as! [CIQRCodeFeature] {
                     qrCodeLink += feature.messageString!
                 }
-
-                if qrCodeLink == .empty {
-                    delegate?.didFail(reason: .invalid)
-                }else{
-                    delegate?.found(code: qrCodeLink)
-                }
+                
+                delegate?.found(code: qrCodeLink)
             }
             else{
                 debugPrint("Something went wrong")

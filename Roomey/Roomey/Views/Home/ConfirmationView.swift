@@ -37,6 +37,7 @@ struct ConfirmationView: View {
                     .background(Color.appColor(.crayonBlue))
                     .cornerRadius(20.0, corners: .allCorners)
                     .padding(.horizontal, 14.0)
+                    .padding(.bottom, 8.0)
                 }
             }
         }.onAppear {
