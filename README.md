@@ -35,8 +35,8 @@
 
 ## Assumptions 
 
-1. Next earliest date possible is 1 day later.
-2. The latest date a user can book a room in advance is one week.
+1. Next earliest possible time selection is at least 30 mins later.
+2. The latest possible date selection is one month in advance.
 3. Weekends, holidays and any other special days are not taken into account.
 4. Majority of the users will select date than scan using QR Code, so the app will auto focus on the Date Field when first enter the page.
 5. There might be round-the-clock booking in future that can be added to the system, so allowing 24 hours booking in the picker.
